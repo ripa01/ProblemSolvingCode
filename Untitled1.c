@@ -55,37 +55,25 @@ void traverse_stack(Stack *s) {
 }
 
 int main() {
-    int input, sum = 0;
+    int input, fact = 1;
     printf("Enter N: ");
     scanf("%d", &input);
 
     Stack s;
     stack_new(&s, input);
 
-    int prevPrev = 0, prev = 1;
-
-    if(input >= 1) {
-            stack_push(&s, prevPrev);
-    }
-    if(input >= 2) {
-            stack_push(&s, prev);
-    }
-
-    for(int i = 3; i <= input; i++) {
-        int next = prev + prevPrev;
-        prevPrev = prev;
-        prev = next;
-        stack_push(&s, next);
+    for(int i = 1; i <= input; i++) {
+        stack_push(&s, i);
     }
 
     traverse_stack(&s);
 
     while (!is_empty(&s))
     {
-        sum += stack_pop(&s);
+        fact *= stack_pop(&s);
     }
 
-    printf("The sum: %d\n", sum);
+    printf("The factorial: %d\n", fact);
 
     return 0;
 }
